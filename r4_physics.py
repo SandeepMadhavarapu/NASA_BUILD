@@ -17,11 +17,12 @@ def simulate(cfg, *, efficiency=0.34, aperture_open=True, illumination=1.0,
     latent=mass*i["regolith_latent_j_kg"]; em=mass*cp*(melt-low)
     cap=mass*cp*(high-low)+latent
     k=i["berm_k_eff_w_mk"] if conductivity is None else conductivity
-    area=1.5*math.pi*cfg["computed"]["core_diameter_m"]**2
+    diameter=(4*mass/(math.pi*i["regolith_density_kg_m3"]))**(1/3)
+    area=1.5*math.pi*diameter**2
     aperture=math.pi*0.24**2
     eta_pmad=i["sic_pmad_efficiency"]
     night=cfg["constraints"]["night_duration_hr"]*3600
-    if dt<=0 or night%dt or not 0<=illumination<=1 or not 0<efficiency<=1:
+    if dt<=0 or night%dt or not 0<=illumination<=1 or not 0<efficiency<=1 or not 0<=initial_fraction<=1 or mass<=0 or dish_area<0 or cycles<1:
         raise ValueError("invalid timestep, illumination or efficiency")
     energy=cap*initial_fraction; start=energy
     total_in=total_out=total_loss=curtail=0.0
