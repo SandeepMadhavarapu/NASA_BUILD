@@ -400,11 +400,11 @@ def build_pdf():
     # DEDICATED VISUAL-AID PAGE (LANDSCAPE PLATE)
     # ==========================================================================
     pdf.add_page(orientation="L")
-    if os.path.exists("HELIOS_R3_Visual_Aid_Plate.png"):
-        pdf.image("HELIOS_R3_Visual_Aid_Plate.png", x=10, y=8, w=259)
+    if os.path.exists("HELIOS_R3_Master_Visual_Plate.png"):
+        pdf.image("HELIOS_R3_Master_Visual_Plate.png", x=10, y=8, w=259)
     else:
         pdf.set_font("DejaVu", "B", 14)
-        pdf.cell(0, 20, "HELIOS_R3_Visual_Aid_Plate.png not found — run generate_figures.py first.")
+        pdf.cell(0, 20, "HELIOS_R3_Master_Visual_Plate.png not found — run generate_figures.py first.")
 
     out_name = "HELIOS_R3_Phase1_Submission.pdf"
     pdf.output(out_name)
@@ -414,3 +414,4 @@ def build_pdf():
 
 if __name__ == "__main__":
     build_pdf()
+

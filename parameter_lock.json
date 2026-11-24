@@ -383,5 +383,12 @@
         10.0
       ]
     }
+  },
+  "structural_fea": {
+    "mast_euler_buckling_kn": 5301.6,
+    "launch_4_5g_load_kn": 2.87,
+    "mast_buckling_fos": 1847.6,
+    "sic_max_thermal_stress_mpa": 156.8,
+    "sic_thermal_fos": 2.42
   }
 }
