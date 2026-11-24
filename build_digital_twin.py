@@ -1,0 +1,284 @@
+﻿import json
+
+with open("parameter_lock.json", "r", encoding="utf-8") as f:
+    LOCK_JSON = f.read()
+
+HTML_TEMPLATE = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>HELIOS-R2 | Track 1 Autonomous Digital Twin</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<style>
+  * {{ box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }}
+  body {{ background: #070b14; color: #e2e8f0; display: grid; grid-template-columns: 330px 1fr 360px; height: 100vh; overflow: hidden; }}
+  .panel {{ background: #0d1322; border-right: 1px solid #1e293b; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }}
+  .panel-right {{ border-right: none; border-left: 1px solid #1e293b; }}
+  h1 {{ font-size: 15px; color: #38bdf8; letter-spacing: 0.5px; }}
+  h2 {{ font-size: 11px; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; border-bottom: 1px solid #1e293b; padding-bottom: 4px; }}
+  .card {{ background: #131c31; border: 1px solid #1e293b; border-radius: 8px; padding: 10px; font-size: 12px; }}
+  .metric-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }}
+  .metric {{ background: #0b1120; padding: 8px; border-radius: 6px; border: 1px solid #1e293b; }}
+  .metric .val {{ font-size: 15px; font-weight: 700; color: #38bdf8; }}
+  .metric .lbl {{ font-size: 10px; color: #94a3b8; }}
+  input[type=range] {{ width: 100%; accent-color: #38bdf8; }}
+  button {{ background: #1d4ed8; color: white; border: none; padding: 7px 10px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 600; }}
+  button.warn {{ background: #b91c1c; }}
+  button.active {{ background: #0284c7; box-shadow: 0 0 8px #38bdf8; }}
+  .badge {{ display: inline-block; background: #064e3b; color: #34d399; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }}
+  #viewport {{ position: relative; width: 100%; height: 100%; }}
+  #hud {{ position: absolute; top: 12px; left: 12px; background: rgba(13,19,34,0.85); padding: 8px 12px; border-radius: 6px; border: 1px solid #1e293b; font-size: 11px; pointer-events: none; }}
+  canvas#chart {{ width: 100%; height: 170px; background: #090e1a; border-radius: 6px; border: 1px solid #1e293b; }}
+  .news-item {{ font-size: 11px; border-bottom: 1px solid #1e293b; padding: 5px 0; color: #cbd5e1; }}
+</style>
+</head>
+<body>
+
+<div class="panel">
+  <div>
+    <h1>HELIOS-R2 DIGITAL TWIN</h1>
+    <div style="font-size:11px;color:#94a3b8;">Track 1: Solar-Tower + 32-Fin ISRU Regolith + Selective TPV</div>
+  </div>
+
+  <div class="card">
+    <h2>1. 708-Hour Lunar Synodic Clock</h2>
+    <div style="margin:6px 0;">Mission Hour: <strong id="hrVal" style="color:#fbbf24;">354 h (Sunset)</strong></div>
+    <input type="range" id="hrSlider" min="0" max="708" step="12" value="354" />
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:#64748b;">
+      <span>0h Sunrise</span><span>354h Sunset</span><span>708h Sunrise</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2. Deployment & Fairing Kinematics</h2>
+    <div style="margin:6px 0;">Deployment State: <strong id="depVal">100% Deployed</strong></div>
+    <input type="range" id="depSlider" min="0" max="100" value="100" />
+    <div style="display:flex;gap:6px;margin-top:8px;">
+      <button id="btnExplode">Exploded View</button>
+      <button id="btnFairing">Show 4.2m Fairing</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3. FMEA Autonomous Fault Injection</h2>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+      <button id="btnRadFault" class="warn">Inject: 1 Radiator Wing Punctured (-25% Area)</button>
+      <button id="btnDustFault" class="warn">Inject: Polar Dust Surge (Trigger EDS Pulse)</button>
+    </div>
+    <div id="fmeaStatus" style="margin-top:6px;font-size:11px;color:#34d399;">Nominal: All 4 VCHP wings at 300 K</div>
+  </div>
+
+  <div class="card">
+    <h2>4. NASA Rules Compliance Gate</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;">
+      <span class="badge">0 Pressure Vessels</span>
+      <span class="badge">0 Toxic Chemicals</span>
+      <span class="badge">100% Autonomous</span>
+      <span class="badge">12m VSAT Mast</span>
+      <span class="badge">1,315 kg Mass</span>
+    </div>
+  </div>
+</div>
+
+<div id="viewport">
+  <div id="hud">
+    <strong>Phase:</strong> <span id="hudPhase">LUNAR NIGHT (TPV ACTIVE)</span> |
+    <strong>Core:</strong> <span id="hudTemp">1660 K</span> |
+    <strong>Mo Louvers:</strong> <span id="hudShutter">28% Open</span> |
+    <strong>Bus Output:</strong> <span id="hudPower">10.0 kWe</span>
+  </div>
+</div>
+
+<div class="panel panel-right">
+  <h2>Agent 1 Physics Lock Telemetry</h2>
+  <div class="metric-grid" id="metricsBox"></div>
+
+  <h2>708-Hr Core Temp & Shutter Profile</h2>
+  <canvas id="chart" width="330" height="170"></canvas>
+
+  <h2>Live Agent 1 NASA / NTRS Intel Stream</h2>
+  <div class="card" id="intelBox" style="max-height:240px;overflow-y:auto;"></div>
+</div>
+
+<script>
+const LOCK = {LOCK_JSON};
+const COMP = LOCK.computed;
+const TS = COMP.transient_sample_every_12h;
+
+const mBox = document.getElementById('metricsBox');
+const metrics = [
+  ['Net Output', LOCK.inputs.net_power_kwe + ' kWe (24/7)'],
+  ['Launched Mass', COMP.earth_launched_mass_kg + ' kg'],
+  ['Regolith Core', COMP.core_diameter_m + 'm x ' + COMP.core_height_m + 'm'],
+  ['Diffusion Time', COMP.diffusion_time_hr + ' hr (32-fin)'],
+  ['Heliostat Dish', COMP.dish_diameter_m + ' m'],
+  ['TPV Efficiency', (LOCK.inputs.tpv_efficiency*100).toFixed(0) + '% (W/HfO2)'],
+];
+mBox.innerHTML = metrics.map(m => `<div class="metric"><div class="lbl">${{m[0]}}</div><div class="val">${{m[1]}}</div></div>`).join('');
+
+const iBox = document.getElementById('intelBox');
+iBox.innerHTML = (LOCK.intel_feed.length ? LOCK.intel_feed : [{{source:'NASA', title:'Baseline HELIOS-R2 Lock v1 Active'}}])
+  .map(x => `<div class="news-item"><strong>[${{x.source}}]</strong> ${{x.title}}</div>`).join('');
+
+const container = document.getElementById('viewport');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x04070f);
+const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 200);
+camera.position.set(16, 12, 18);
+const renderer = new THREE.WebGLRenderer({{ antialias: true }});
+renderer.setSize(container.clientWidth, container.clientHeight);
+container.appendChild(renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 6, 0);
+
+scene.add(new THREE.AmbientLight(0x405070, 1.2));
+const sunLight = new THREE.DirectionalLight(0xfff5e0, 2.0);
+sunLight.position.set(25, 3, 10);
+scene.add(sunLight);
+
+const ground = new THREE.Mesh(new THREE.CircleGeometry(24, 48), new THREE.MeshStandardMaterial({{ color: 0x1e2430, roughness: 0.95 }}));
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
+
+const coreMat = new THREE.MeshStandardMaterial({{ color: 0xff5511, emissive: 0xaa2200, emissiveIntensity: 0.8 }});
+const coreMesh = new THREE.Mesh(new THREE.CylinderGeometry(COMP.core_diameter_m/2, COMP.core_diameter_m/2, COMP.core_height_m, 32), coreMat);
+coreMesh.position.y = COMP.core_height_m / 2;
+scene.add(coreMesh);
+
+const bermMesh = new THREE.Mesh(
+  new THREE.CylinderGeometry(COMP.core_diameter_m/2 + 1.5, COMP.core_diameter_m/2 + 1.5, COMP.core_height_m, 32, 1, false, 0, Math.PI * 1.5),
+  new THREE.MeshStandardMaterial({{ color: 0x475569, transparent: true, opacity: 0.65 }})
+);
+bermMesh.position.y = COMP.core_height_m / 2;
+scene.add(bermMesh);
+
+const deckY = COMP.core_height_m;
+const deck = new THREE.Mesh(new THREE.CylinderGeometry(2.1, 2.1, 0.25, 8), new THREE.MeshStandardMaterial({{ color: 0xd4af37, metalness: 0.6 }}));
+deck.position.y = deckY + 0.12;
+scene.add(deck);
+
+const tpv = new THREE.Mesh(new THREE.CylinderGeometry(0.93, 0.93, 1.15, 32), new THREE.MeshStandardMaterial({{ color: 0x1d4ed8, metalness: 0.5 }}));
+tpv.position.y = deckY + 0.82;
+scene.add(tpv);
+
+const radGroup = new THREE.Group();
+radGroup.position.y = deckY + 1.2;
+const radWings = [];
+for (let i = 0; i < 4; i++) {{
+  const pivot = new THREE.Group();
+  pivot.rotation.y = (i * Math.PI) / 2;
+  const wing = new THREE.Mesh(new THREE.BoxGeometry(COMP.radiator_wing_length_m, 2.0, 0.05), new THREE.MeshStandardMaterial({{ color: 0xf8fafc }}));
+  wing.position.x = 1.4 + COMP.radiator_wing_length_m / 2;
+  pivot.add(wing);
+  radGroup.add(pivot);
+  radWings.push({{ pivot, wing }});
+}}
+scene.add(radGroup);
+
+const mastGroup = new THREE.Group();
+mastGroup.position.y = deckY + 1.4;
+const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.55, 12.0, 6), new THREE.MeshStandardMaterial({{ color: 0x334155, wireframe: true }}));
+mast.position.y = 6.0;
+mastGroup.add(mast);
+const relay = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.75, 0.15, 24), new THREE.MeshStandardMaterial({{ color: 0xe2e8f0, metalness: 0.9 }}));
+relay.position.y = 12.0;
+mastGroup.add(relay);
+scene.add(mastGroup);
+
+const dish = new THREE.Mesh(new THREE.CylinderGeometry(COMP.dish_diameter_m/2, 0.5, 0.6, 32), new THREE.MeshStandardMaterial({{ color: 0x94a3b8, metalness: 0.8 }}));
+dish.position.set(5.5, deckY + 1.8, 0);
+dish.rotation.z = -0.75;
+scene.add(dish);
+
+const fairing = new THREE.Mesh(new THREE.CylinderGeometry(2.1, 2.1, 14.5, 32, 1, true), new THREE.MeshBasicMaterial({{ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.25 }}));
+fairing.position.y = deckY + 7.25;
+fairing.visible = false;
+scene.add(fairing);
+
+let exploded = false, radFault = false;
+document.getElementById('btnExplode').onclick = (e) => {{ exploded = !exploded; e.target.classList.toggle('active'); updateScene(); }};
+document.getElementById('btnFairing').onclick = (e) => {{ fairing.visible = !fairing.visible; e.target.classList.toggle('active'); }};
+document.getElementById('btnRadFault').onclick = (e) => {{
+  radFault = !radFault;
+  e.target.classList.toggle('active');
+  radWings[0].wing.material.color.setHex(radFault ? 0xef4444 : 0xf8fafc);
+  document.getElementById('fmeaStatus').innerText = radFault
+    ? `FAULT ISOLATED: VCHP closed Wing 1; 3 wings running at ${{COMP.fmea_3wing_radiator_temp_k}} K (10.0 kWe maintained)`
+    : 'Nominal: All 4 VCHP wings at 300 K';
+}};
+document.getElementById('btnDustFault').onclick = (e) => {{
+  e.target.classList.toggle('active');
+  document.getElementById('fmeaStatus').innerText = 'EDS PULSE ACTIVE: 1.2 kV 10 Hz traveling wave clearing heliostat & PV';
+}};
+
+function drawChart(curIdx) {{
+  const c = document.getElementById('chart');
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, c.width, c.height);
+  ctx.strokeStyle = '#1e293b';
+  ctx.strokeRect(0, 0, c.width, c.height);
+
+  ctx.beginPath();
+  ctx.strokeStyle = '#fb923c';
+  ctx.lineWidth = 2;
+  TS.t_core_k.forEach((t, i) => {{
+    const x = (i / (TS.t_core_k.length - 1)) * c.width;
+    const y = c.height - ((t - 1200) / 500) * (c.height - 20) - 10;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }});
+  ctx.stroke();
+
+  const cx = (curIdx / (TS.t_core_k.length - 1)) * c.width;
+  ctx.strokeStyle = '#38bdf8';
+  ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, c.height); ctx.stroke();
+}}
+
+function updateScene() {{
+  const hr = parseInt(document.getElementById('hrSlider').value);
+  const dep = parseInt(document.getElementById('depSlider').value) / 100.0;
+  const idx = Math.min(TS.hours.length - 1, Math.floor(hr / 12));
+  const tCore = TS.t_core_k[idx];
+  const shutter = TS.shutter_open[idx];
+  const isDay = hr < 354;
+
+  document.getElementById('hrVal').innerText = `${{hr}} h (${{isDay ? 'Lunar Day' : 'Lunar Night'}})`;
+  document.getElementById('depVal').innerText = `${{Math.round(dep*100)}}% Deployed`;
+  document.getElementById('hudPhase').innerText = isDay ? 'LUNAR DAY (CHARGING + ROSA PV)' : 'LUNAR NIGHT (TPV ACTIVE)';
+  document.getElementById('hudTemp').innerText = `${{tCore}} K`;
+  document.getElementById('hudShutter').innerText = `${{Math.round(shutter*100)}}% Open`;
+  document.getElementById('hudPower').innerText = isDay ? '12.0 kWe' : '10.0 kWe';
+
+  sunLight.intensity = isDay ? 2.2 : 0.15;
+  coreMat.emissiveIntensity = 0.2 + ((tCore - 1250) / 410) * 1.1;
+
+  mastGroup.scale.y = 0.25 + 0.75 * dep;
+  radWings.forEach(rw => {{ rw.pivot.rotation.z = (1 - dep) * (Math.PI / 2); }});
+  dish.scale.setScalar(0.35 + 0.65 * dep);
+
+  const expOffset = exploded ? 2.2 : 0;
+  tpv.position.y = deckY + 0.82 + expOffset;
+  radGroup.position.y = deckY + 1.2 + expOffset * 1.5;
+  mastGroup.position.y = deckY + 1.4 + expOffset * 2.2;
+
+  drawChart(idx);
+}}
+
+document.getElementById('hrSlider').oninput = updateScene;
+document.getElementById('depSlider').oninput = updateScene;
+updateScene();
+
+function animate() {{
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}}
+animate();
+</script>
+</body>
+</html>
+"""
+
+with open("HELIOS_R2_Digital_Twin.html", "w", encoding="utf-8") as f:
+    f.write(HTML_TEMPLATE)
+print("Compiled HELIOS_R2_Digital_Twin.html successfully.")
