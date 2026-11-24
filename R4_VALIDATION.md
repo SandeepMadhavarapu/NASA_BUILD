@@ -37,4 +37,4 @@ The red-team gate intentionally exits nonzero when evidence is missing. All new 
 - Student authors must review code, results and AI disclosure; do not imply independent human verification until performed.
 
 ## Known model limitations
-The R4 screening model uses an illustrative linear efficiency derating, lumped temperature, simple aperture emissivity and berm loss, fixed emitter area, uniform illumination factor and no daytime electrical load model. The optimization does not yet recompute the geometry or launched mass for candidate regolith masses. It ranks screening cases, not flight designs. No statistical distributions are calibrated to lunar field data.
+The R4 screening model uses an illustrative linear efficiency derating, lumped temperature, simple aperture emissivity and berm loss, fixed emitter area, uniform illumination factor and no daytime electrical load model. The optimization scales the idealized core surface area but does not recompute CAD or launched mass for candidate regolith masses. It ranks screening cases, not flight designs. No statistical distributions are calibrated to lunar field data.
