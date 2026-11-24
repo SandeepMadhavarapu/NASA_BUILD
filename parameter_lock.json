@@ -390,5 +390,13 @@
     "mast_buckling_fos": 1847.6,
     "sic_max_thermal_stress_mpa": 156.8,
     "sic_thermal_fos": 2.42
+  },
+  "monte_carlo_10yr": {
+    "trials": 5000,
+    "eol_p50_power_kwe": 10.0,
+    "eol_p10_power_kwe": 10.0,
+    "eol_p90_power_kwe": 10.0,
+    "prob_ge_9_8kwe_pct": 100.0,
+    "eol_median_sleeve_open_pct": 89.1
   }
 }
