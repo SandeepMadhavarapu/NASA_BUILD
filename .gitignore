@@ -1,3 +1,5 @@
 ﻿__pycache__/
 *.log
 agent1_memory.json
+
+rules_snapshot.txt

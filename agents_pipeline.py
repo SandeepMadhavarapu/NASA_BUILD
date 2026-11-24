@@ -122,7 +122,10 @@ class Agent1PhysicsAndIntel:
                 if h != self.memory.get("rules_hash"):
                     self.memory["rules_hash"] = h
                     self.spec["rules_snapshot_hash"] = h[:16]
-                    log("AGENT-1", f"Official rules verified (SHA256: {h[:12]}).")
+                    log("AGENT-1", f"Official rules CHANGED (SHA256: {h[:12]}). Saved rules_snapshot.txt")
+                    with open("rules_snapshot.txt", "w", encoding="utf-8") as rf:
+                        rf.write(text)
+                    subprocess.run(["msg", os.environ.get("USERNAME", "*"), "HELIOS-R3 Alert: Official Moon Base Challenge rules page changed! Check rules_snapshot.txt."], check=False)
                     return True
         except Exception as e:
             log("AGENT-1", f"Rules check warning: {e}")
@@ -318,6 +321,9 @@ def trigger_downstream_agents():
     if os.path.exists("cadquery_pro.py"):
         log("AGENT-2", "Building HELIOS-R3 multi-body aerospace CAD (.step + .stl)...")
         subprocess.run(["python", "cadquery_pro.py"], check=False)
+    if os.path.exists("generate_figures.py"):
+        log("AGENT-3", "Rendering HELIOS-R3 Visual Aid Plate (.png + .pdf)...")
+        subprocess.run(["python", "generate_figures.py"], check=False)
 
 
 if __name__ == "__main__":
@@ -337,3 +343,4 @@ if __name__ == "__main__":
             if agent1.run_cycle():
                 trigger_downstream_agents()
             time.sleep(args.interval)
+
