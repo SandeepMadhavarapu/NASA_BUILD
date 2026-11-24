@@ -4,6 +4,8 @@ import sys
 import matplotlib
 from fpdf import FPDF
 
+if os.environ.get("HELIOS_LEGACY_DRAFT") != "1":
+    raise SystemExit("R3 submission is blocked pending R4 validation. Legacy draft requires explicit opt-in.")
 TEAM_ID = sys.argv[1] if len(sys.argv) > 1 else "TEAM-ID-PENDING"
 
 with open("parameter_lock.json", "r", encoding="utf-8") as f:
