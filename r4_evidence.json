@@ -1,0 +1,79 @@
+{
+  "status": "source-reviewed; engineering inputs not certified",
+  "sources": [
+    {
+      "id": "TPV1",
+      "url": "https://doi.org/10.1073/pnas.2215977119",
+      "observation": "32.5 ± 0.1% laboratory TPV efficiency at 1036 C (1309 K), specialized semitransparent InGaAs architecture",
+      "limitation": "Not HELIOS emitter, system efficiency, power density or life qualification"
+    },
+    {
+      "id": "REG1",
+      "url": "https://doi.org/10.1002/2017JE005387",
+      "observation": "Diviner-derived regolith conductivity and heat capacity depend on temperature",
+      "limitation": "Natural soil model does not establish high-temperature engineered storage properties"
+    },
+    {
+      "id": "REG2",
+      "url": "https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19920005262.pdf",
+      "observation": "NASA preliminary study of lunar regolith thermal storage including molten zone",
+      "limitation": "Not qualification of HELIOS containment"
+    },
+    {
+      "id": "SUN1",
+      "url": "https://svs.gsfc.nasa.gov/5027",
+      "observation": "LOLA-based lunar south pole illumination visualization for 2025–2028 at 2-hour intervals",
+      "limitation": "Site-specific numerical horizon and ephemeris still required"
+    },
+    {
+      "id": "SUN2",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0019103514004278",
+      "observation": "South polar illumination calculated using 20 m/pixel LOLA terrain model",
+      "limitation": "No selected site validated"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "tpv_efficiency",
+      "screening_range": [
+        0.2,
+        0.325
+      ],
+      "unit": "fraction",
+      "status": "assumed sensitivity range; upper anchor laboratory measurement",
+      "source": "TPV1"
+    },
+    {
+      "name": "solid_core_cp",
+      "screening_range": [
+        740,
+        1400
+      ],
+      "unit": "J/kg/K",
+      "status": "unverified design envelope; no high-temperature curve established",
+      "source": "REG2"
+    },
+    {
+      "name": "berm_conductivity",
+      "screening_range": [
+        0.03,
+        0.07
+      ],
+      "unit": "W/m/K",
+      "status": "unverified high-temperature design envelope",
+      "source": "REG1"
+    },
+    {
+      "name": "containment_compatibility",
+      "status": "missing"
+    },
+    {
+      "name": "TPV_power_density_curve",
+      "status": "missing"
+    },
+    {
+      "name": "lunar_site_horizon",
+      "status": "missing"
+    }
+  ]
+}

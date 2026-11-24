@@ -1,0 +1,155 @@
+{
+  "assumptions": "three cycles; initially charged; 25% peak TPV efficiency, 80% illumination, shutter closed at night; no daytime PV or parasitic load; independent equation transcription",
+  "rows": [
+    {
+      "mass": 125000,
+      "collector_m2": 80,
+      "minimum_kw": 0,
+      "unserved_kwh": 1699.1326340477178
+    },
+    {
+      "mass": 125000,
+      "collector_m2": 100,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 9.903189379656396e-14
+    },
+    {
+      "mass": 125000,
+      "collector_m2": 120,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.092459456231154e-13
+    },
+    {
+      "mass": 125000,
+      "collector_m2": 140,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.092459456231154e-13
+    },
+    {
+      "mass": 125000,
+      "collector_m2": 160,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.092459456231154e-13
+    },
+    {
+      "mass": 150000,
+      "collector_m2": 80,
+      "minimum_kw": 0,
+      "unserved_kwh": 980.7723591729091
+    },
+    {
+      "mass": 150000,
+      "collector_m2": 100,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 9.681144774731365e-14
+    },
+    {
+      "mass": 150000,
+      "collector_m2": 120,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.2567724638756772e-13
+    },
+    {
+      "mass": 150000,
+      "collector_m2": 140,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.3722356584366935e-13
+    },
+    {
+      "mass": 150000,
+      "collector_m2": 160,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.3722356584366935e-13
+    },
+    {
+      "mass": 175000,
+      "collector_m2": 80,
+      "minimum_kw": 0,
+      "unserved_kwh": 361.68078464134595
+    },
+    {
+      "mass": 175000,
+      "collector_m2": 100,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.0080825063596421e-13
+    },
+    {
+      "mass": 175000,
+      "collector_m2": 120,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.4477308241112041e-13
+    },
+    {
+      "mass": 175000,
+      "collector_m2": 140,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.425526363618701e-13
+    },
+    {
+      "mass": 175000,
+      "collector_m2": 160,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.425526363618701e-13
+    },
+    {
+      "mass": 200000,
+      "collector_m2": 80,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.0436096431476471e-13
+    },
+    {
+      "mass": 200000,
+      "collector_m2": 100,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.0302869668521453e-13
+    },
+    {
+      "mass": 200000,
+      "collector_m2": 120,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.5276668818842154e-13
+    },
+    {
+      "mass": 200000,
+      "collector_m2": 140,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.6120438317557273e-13
+    },
+    {
+      "mass": 200000,
+      "collector_m2": 160,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.6120438317557273e-13
+    },
+    {
+      "mass": 250000,
+      "collector_m2": 80,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 8.970602038971265e-14
+    },
+    {
+      "mass": 250000,
+      "collector_m2": 100,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.1057821325266559e-13
+    },
+    {
+      "mass": 250000,
+      "collector_m2": 120,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.6786572132332367e-13
+    },
+    {
+      "mass": 250000,
+      "collector_m2": 140,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.6786572132332367e-13
+    },
+    {
+      "mass": 250000,
+      "collector_m2": 160,
+      "minimum_kw": 9.999999999999998,
+      "unserved_kwh": 1.6786572132332367e-13
+    }
+  ]
+}

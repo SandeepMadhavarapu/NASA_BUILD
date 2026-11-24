@@ -7,10 +7,12 @@ from pptx.dml.color import RGBColor
 with open("parameter_lock.json", "r", encoding="utf-8") as f:
     LOCK = json.load(f)
 
+if os.environ.get("HELIOS_LEGACY_DRAFT") != "1":
+    raise SystemExit("Legacy R3 pitch blocked: run R4 validation; set HELIOS_LEGACY_DRAFT=1 only for internal historical review.")
 C = LOCK["computed"]
 INP = LOCK["inputs"]
-FEA = LOCK.get("structural_fea", {})
-MC = LOCK.get("monte_carlo_10yr", {})
+FEA = LOCK["structural_fea"]
+MC = LOCK["monte_carlo_10yr"]
 
 prs = Presentation()
 prs.slide_width = Inches(13.333)
@@ -90,8 +92,8 @@ slides_spec = [
     ("Autonomous 3-Stage ISRU Commissioning & FMEA", "ConOps, Fault Tolerance & 10-Year Reliability", [
         ("Stage 1–3 Ramp-Up", "Days 1–14: 110 kg rover builds core/berm; Days 15–42: 3.5 kWe partial core; Day 43+: 10.0 kWe full baseload."),
         ("3-Wing Radiator FMEA", f"VCHP gas diode isolates punctured wing; 3 wings equilibrate at {FEA.get('fmea_3wing_radiator_temp_k', C['fmea_3wing_radiator_temp_k'])} K at 100% power."),
-        ("Structural & Thermal FoS", f"Mast buckling FoS = {FEA.get('mast_buckling_fos', 1847.6)}x (4.5g launch); SiC 1,660 K thermal stress FoS = {FEA.get('sic_thermal_fos', 2.42)}x."),
-        ("10-Year Monte Carlo Proof", f"5,000-trial simulation yields {MC.get('eol_p50_power_kwe', 10.0)} kWe median Year-10 output ({MC.get('prob_ge_9_8kwe_pct', 99.8)}% >=9.8 kWe)."),
+        ("Analytical screening only", f"Mast buckling FoS = {FEA['mast_buckling_fos']}x (4.5g launch); SiC 1,660 K thermal stress FoS = {FEA['sic_thermal_fos']}x."),
+        ("Limited R3 scenario estimate", f"5,000-trial simulation yields {MC['eol_p50_power_kwe']} kWe median Year-10 output ({MC['prob_ge_9_8kwe_pct']}% >=9.8 kWe)."),
     ], "HELIOS_R3_MonteCarlo_10Yr.png"),
 ]
 
@@ -106,13 +108,13 @@ qa_md = f"""# HELIOS-R3: NASA Judge Red-Team Q&A Preparation Brief
    **A:** HELIOS-R3 has zero high-temperature rotary bearings. Power regulation uses a single cylindrical molybdenum sleeve translated vertically along linear flexures on the **300 K cold side** (`24%` open at `1,660 K` to `86%` open at `1,250 K`), leaving `+10.5%` stroke reserve (`95%` max) for 10-year aging.
 
 2. **Q: Sintered lunar regolith is a thermal insulator ($k \\approx 0.15\\text{{ W/m}}\\cdot\\text{{K}}$). How do you extract heat fast enough?**
-   **A:** Embedding **32 radial SiC fins** and **3 concentric rings** limits conductive path length to `7.53 cm`, reducing characteristic thermal diffusion time from `3,130 hr` (8 fins) to **`{C['diffusion_time_hr']} hr`** (verified against `1,660 K` thermal stress with `FoS = {FEA.get('sic_thermal_fos', 2.42)}x`).
+   **A:** Embedding **32 radial SiC fins** and **3 concentric rings** limits conductive path length to `7.53 cm`, reducing characteristic thermal diffusion time from `3,130 hr` (8 fins) to **`{C['diffusion_time_hr']} hr`** (verified against `1,660 K` thermal stress with `FoS = {FEA['sic_thermal_fos']}x`).
 
 3. **Q: What happens if a micrometeoroid punctures one of your four radiator wings?**
    **A:** Each wing uses Variable-Conductance Heat Pipes (VCHPs) with non-condensable gas reservoirs that passively isolate a punctured header. The remaining three wings (`48.88 m²`) reject the full `20.17 kW_th` load by rising from `300 K` to **`{C['fmea_3wing_radiator_temp_k']} K` ($46.6^\\circ\\text{{C}}$)**, maintaining `100%` (`10.0 kWe`) electrical output.
 
 4. **Q: How does HELIOS-R3 maintain `10.0 kWe` across a 10-year design life as TPV cells and mirrors degrade?**
-   **A:** Across `5,000` Monte Carlo trials modeling TPV radiation aging (`0.35%/yr`), mirror dust degradation (`0.40%/yr`), and berm conductivity scatter, the cold-side sleeve opens slightly further (`{MC.get('eol_median_sleeve_open_pct', 90.2)}%` median at Year 10) to hold **`{MC.get('eol_p50_power_kwe', 10.0)} kWe` median End-of-Life output** (`{MC.get('prob_ge_9_8kwe_pct', 99.8)}%` probability $\\ge 9.8\\text{{ kWe}}$).
+   **A:** Across `5,000` Monte Carlo trials modeling TPV radiation aging (`0.35%/yr`), mirror dust degradation (`0.40%/yr`), and berm conductivity scatter, the cold-side sleeve opens slightly further (`{MC['eol_median_sleeve_open_pct']}%` median at Year 10) to hold **`{MC['eol_p50_power_kwe']} kWe` median End-of-Life output** (`{MC['prob_ge_9_8kwe_pct']}%` probability $\\ge 9.8\\text{{ kWe}}$).
 """
 with open("Judge_RedTeam_QA.md", "w", encoding="utf-8") as f:
     f.write(qa_md)

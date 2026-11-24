@@ -1,0 +1,177 @@
+{
+  "method": "Independent JavaScript transcription of R4 equations, not execution of committed Python",
+  "cases": {
+    "baseline": {
+      "min_kw": 0,
+      "mean_kw": 1.350529257922529,
+      "unserved_kwh": 6123.825285390849,
+      "balance_error": 3.9150220989343045e-14
+    },
+    "shutter": {
+      "min_kw": 0,
+      "mean_kw": 3.0774293824725056,
+      "unserved_kwh": 4901.179997209466,
+      "balance_error": 3.13801562386726e-14
+    },
+    "lower_eff": {
+      "min_kw": 0,
+      "mean_kw": 2.2841767722954365,
+      "unserved_kwh": 5462.802845214831,
+      "balance_error": 3.307048611425705e-14
+    },
+    "shadow": {
+      "min_kw": 0,
+      "mean_kw": 1.059892434002535,
+      "unserved_kwh": 6329.596156726206,
+      "balance_error": 1.7094861569264226e-14
+    },
+    "cold": {
+      "min_kw": 0,
+      "mean_kw": 1.4954339033070616,
+      "unserved_kwh": 6021.2327964586,
+      "balance_error": 4.669393855721877e-14
+    },
+    "halfstep": {
+      "min_kw": 0,
+      "mean_kw": 1.352390503182117,
+      "unserved_kwh": 6122.507523747061,
+      "balance_error": 8.222636943165017e-14
+    },
+    "empty": {
+      "min_kw": 0,
+      "mean_kw": 0,
+      "unserved_kwh": 3540,
+      "balance_error": 0
+    }
+  },
+  "candidates": [
+    {
+      "m": 59020,
+      "a": 33.03,
+      "min_kw": 0,
+      "mean_kw": 1.0026766532144868,
+      "unserved_kwh": 9555.157394286216,
+      "balance_error": 6.919303305135017e-15
+    },
+    {
+      "m": 59020,
+      "a": 45,
+      "min_kw": 0,
+      "mean_kw": 2.2297988429060727,
+      "unserved_kwh": 8251.953628833751,
+      "balance_error": 2.2620872969270974e-15
+    },
+    {
+      "m": 59020,
+      "a": 60,
+      "min_kw": 0,
+      "mean_kw": 3.607432465506095,
+      "unserved_kwh": 6788.9067216325275,
+      "balance_error": 4.861214719381434e-15
+    },
+    {
+      "m": 59020,
+      "a": 80,
+      "min_kw": 0,
+      "mean_kw": 5.77869029059714,
+      "unserved_kwh": 4483.030911385837,
+      "balance_error": 4.596195015620822e-15
+    },
+    {
+      "m": 75000,
+      "a": 33.03,
+      "min_kw": 0,
+      "mean_kw": 1.4598776951838621,
+      "unserved_kwh": 9069.609887714738,
+      "balance_error": 1.260461018502188e-14
+    },
+    {
+      "m": 75000,
+      "a": 45,
+      "min_kw": 0,
+      "mean_kw": 2.739298321500645,
+      "unserved_kwh": 7710.8651825663155,
+      "balance_error": 1.0680846797262764e-15
+    },
+    {
+      "m": 75000,
+      "a": 60,
+      "min_kw": 0,
+      "mean_kw": 4.228387421505414,
+      "unserved_kwh": 6129.45255836125,
+      "balance_error": 3.851590746456894e-16
+    },
+    {
+      "m": 75000,
+      "a": 80,
+      "min_kw": 0,
+      "mean_kw": 6.697303342764869,
+      "unserved_kwh": 3507.4638499837083,
+      "balance_error": 1.1358589239998233e-14
+    },
+    {
+      "m": 100000,
+      "a": 33.03,
+      "min_kw": 0,
+      "mean_kw": 2.161617363468234,
+      "unserved_kwh": 8324.362359996736,
+      "balance_error": 1.2820288843070115e-14
+    },
+    {
+      "m": 100000,
+      "a": 45,
+      "min_kw": 0,
+      "mean_kw": 3.5265250166845017,
+      "unserved_kwh": 6874.830432281059,
+      "balance_error": 4.328652239820816e-16
+    },
+    {
+      "m": 100000,
+      "a": 60,
+      "min_kw": 0,
+      "mean_kw": 5.22020228023498,
+      "unserved_kwh": 5076.145178390451,
+      "balance_error": 1.816247769062843e-15
+    },
+    {
+      "m": 100000,
+      "a": 80,
+      "min_kw": 0,
+      "mean_kw": 7.679388929780467,
+      "unserved_kwh": 2464.4889565731437,
+      "balance_error": 1.2766811285458513e-15
+    },
+    {
+      "m": 125000,
+      "a": 33.03,
+      "min_kw": 0,
+      "mean_kw": 2.8606969027103313,
+      "unserved_kwh": 7581.9398893216285,
+      "balance_error": 7.951326290713957e-15
+    },
+    {
+      "m": 125000,
+      "a": 45,
+      "min_kw": 0,
+      "mean_kw": 4.318986797329968,
+      "unserved_kwh": 6033.236021235574,
+      "balance_error": 2.497684145474278e-15
+    },
+    {
+      "m": 125000,
+      "a": 60,
+      "min_kw": 0,
+      "mean_kw": 5.959328618530574,
+      "unserved_kwh": 4291.193007120531,
+      "balance_error": 2.3753791142741104e-15
+    },
+    {
+      "m": 125000,
+      "a": 80,
+      "min_kw": 0,
+      "mean_kw": 8.402548045169507,
+      "unserved_kwh": 1696.4939760299847,
+      "balance_error": 1.0690107384444715e-15
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "method": "Independent JavaScript transcription; synthetic schedules; no site or solver validation",
+  "results": {
+    "regular": {
+      "minimum_bus_kw": 10.5,
+      "unserved_kwh": 0,
+      "service_fraction": 1
+    },
+    "fragmented": {
+      "minimum_bus_kw": 10.5,
+      "unserved_kwh": 0,
+      "service_fraction": 1
+    },
+    "long_outage": {
+      "minimum_bus_kw": 0,
+      "unserved_kwh": 2353.432390974147,
+      "service_fraction": 0.8940677966101694
+    },
+    "derated": {
+      "minimum_bus_kw": 10.5,
+      "unserved_kwh": 0,
+      "service_fraction": 1
+    }
+  },
+  "candidates": [
+    {
+      "mass_kg": 125000,
+      "collector_m2": 100,
+      "all_pass": false,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 0,
+          "unserved_kwh": 2353.432390974147,
+          "service_fraction": 0.8940677966101694
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 125000,
+      "collector_m2": 150,
+      "all_pass": false,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 0,
+          "unserved_kwh": 2353.432390974147,
+          "service_fraction": 0.8940677966101694
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 125000,
+      "collector_m2": 200,
+      "all_pass": false,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 0,
+          "unserved_kwh": 2353.432390974147,
+          "service_fraction": 0.8940677966101694
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 175000,
+      "collector_m2": 100,
+      "all_pass": false,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 0,
+          "unserved_kwh": 418.91679406859504,
+          "service_fraction": 0.9811676082862524
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 175000,
+      "collector_m2": 150,
+      "all_pass": false,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 0,
+          "unserved_kwh": 418.91679406859504,
+          "service_fraction": 0.9811676082862524
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 175000,
+      "collector_m2": 200,
+      "all_pass": false,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 0,
+          "unserved_kwh": 418.91679406859504,
+          "service_fraction": 0.9811676082862524
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 250000,
+      "collector_m2": 100,
+      "all_pass": true,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 250000,
+      "collector_m2": 150,
+      "all_pass": true,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 250000,
+      "collector_m2": 200,
+      "all_pass": true,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 350000,
+      "collector_m2": 100,
+      "all_pass": true,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 350000,
+      "collector_m2": 150,
+      "all_pass": true,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    },
+    {
+      "mass_kg": 350000,
+      "collector_m2": 200,
+      "all_pass": true,
+      "cases": {
+        "regular": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "fragmented": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "long_outage": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        },
+        "derated": {
+          "minimum_bus_kw": 10.5,
+          "unserved_kwh": 0,
+          "service_fraction": 1
+        }
+      }
+    }
+  ]
+}

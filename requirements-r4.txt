@@ -1,0 +1,6 @@
+numpy
+matplotlib
+fpdf2
+python-pptx
+pymupdf
+build123d
