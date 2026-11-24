@@ -16,9 +16,9 @@ sections=[
 ("Conditional model outcome","22 of 25 explored configurations met the nighttime target in the simplified model. No verified daytime electrical supply, startup, hardware mass or site-specific data."),
 ("Outstanding evidence","Independent structural solver cross-check, heat transfer mesh convergence, containment testing, optical raytrace, site illumination, mass and deployment, regulatory review."),
 ("Decision","HOLD submission. Existing R3 artifacts are historical. This document is an internal review, not a competition paper.")]
-pdf=FPDF();pdf.set_margins(20,20,20);pdf.add_page();pdf.set_font("Helvetica","B",18);pdf.multi_cell(0,9,"HELIOS-R4 | INTERNAL REVIEW");pdf.set_font("Helvetica",size=11)
+pdf=FPDF();pdf.set_margins(20,20,20);pdf.add_page();pdf.set_font("Helvetica","B",18);pdf.set_x(pdf.l_margin);pdf.multi_cell(0,9,"HELIOS-R4 | INTERNAL REVIEW");pdf.set_font("Helvetica",size=11)
 for title,body in sections:
-    pdf.set_font("Helvetica","B",12);pdf.multi_cell(0,7,title);pdf.set_font("Helvetica",size=11);pdf.multi_cell(0,6,body);pdf.ln(2)
+    pdf.set_font("Helvetica","B",12);pdf.set_x(pdf.l_margin);pdf.multi_cell(0,7,title);pdf.set_font("Helvetica",size=11);pdf.set_x(pdf.l_margin);pdf.multi_cell(0,6,body);pdf.ln(2)
 pdf.add_page();pdf.image("HELIOS_R4_Trade.png",x=20,y=25,w=170);pdf.output("HELIOS_R4_Internal_Review.pdf")
 prs=Presentation()
 for title,body in sections:
