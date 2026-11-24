@@ -1,0 +1,79 @@
+[
+  {
+    "id": "thermal",
+    "source": "NASA LUTHER https://ntrs.nasa.gov/citations/19930007428",
+    "acceptance": "Measure conductivity and heat capacity versus temperature; spatial conduction model with mesh convergence; deliver 10 kW throughout night.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "mass",
+    "source": "NASA systems engineering https://www.nasa.gov/reference/systems-engineering-handbook/",
+    "acceptance": "CAD material union volumes, density, all imported components and margin; reconcile against challenge limit.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "containment",
+    "source": "ESA https://www.esa.int/Enabling_Support/Space_Engineering_Technology/Printing_bricks_from_moondust_using_the_Sun_s_heat",
+    "acceptance": "Compare solid and molten; measure solidus, cycling, creep and cracking; no unqualified bulk melt.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "tpv",
+    "source": "https://www.nature.com/articles/s41586-022-04473-y",
+    "acceptance": "Use measured efficiency and power density versus emitter/cell temperature; include cooling and spectral losses.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "excavation",
+    "source": "NASA https://www.nasa.gov/infrastructure-pilot-excavator/",
+    "acceptance": "Model excavation, haul, processing, downtime and energy, including berm.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "startup",
+    "source": "NASA https://ntrs.nasa.gov/citations/20110008831",
+    "acceptance": "Cold start timeline, survival load and battery reserve with no negative energy.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "site",
+    "source": "NASA https://pgda.gsfc.nasa.gov/products/78",
+    "acceptance": "Use traceable DEM and chronological illumination; also pass prescribed darkness scenario.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "dust",
+    "source": "NASA https://www.nasa.gov/image-article/nasas-dust-shield-successfully-repels-lunar-regolith-on-moon/",
+    "acceptance": "Quantify optical degradation, cleaning recovery and power consumption.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "structure",
+    "source": "NASA https://www.nasa.gov/reference/systems-engineering-handbook/",
+    "acceptance": "Check launch loads, deployment, buckling, thermal stress, joints and mesh convergence.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "reliability",
+    "source": "NASA https://www.nasa.gov/reference/systems-engineering-handbook/",
+    "acceptance": "FMEA, common cause failures, calibrated uncertainty, lifetime and maintainability.",
+    "status": "OPEN",
+    "evidence": null
+  },
+  {
+    "id": "rules",
+    "source": "https://moonbasechallenge.org/rules/",
+    "acceptance": "Verify current requirements and obtain written clarification for working-fluid components.",
+    "status": "OPEN",
+    "evidence": null
+  }
+]
